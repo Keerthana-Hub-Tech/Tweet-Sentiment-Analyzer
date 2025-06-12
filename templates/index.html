@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Tweet Sentiment Analyzer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(to right, #d4fc79, #96e6a1);
+        }
+        .gradient-btn {
+            background: linear-gradient(to right, #4f46e5, #7c3aed);
+            transition: all 0.3s ease;
+        }
+        .gradient-btn:hover {
+            background: linear-gradient(to right, #4338ca, #6d28d9);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col items-center justify-center p-4">
+    <div class="w-full max-w-md bg-white rounded-xl shadow-2xl overflow-hidden p-8">
+        <div class="text-center mb-8">
+            <h1 class="text-3xl font-bold text-gray-800 mb-2">Tweet Sentiment Analyzer</h1>
+            <p class="text-gray-600">Understand the sentiment behind your tweets</p>
+        </div>
+
+        <form action="/predict" method="post" class="space-y-4">
+            <div class="relative">
+                <textarea 
+                    id="tweet" 
+                    name="tweet" 
+                    placeholder="Type or speak your tweet here..."
+                    class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition duration-200 resize-none"
+                    rows="4"
+                ></textarea>
+            </div>
+            
+            <div class="flex flex-col sm:flex-row gap-3">
+                <button 
+                    type="submit" 
+                    class="gradient-btn flex-1 py-3 px-6 rounded-lg text-white font-medium shadow-md hover:shadow-lg"
+                >
+                    Analyze Sentiment
+                </button>
+                
+                <button 
+                    type="button" 
+                    id="mic-button"
+                    class="flex items-center justify-center gap-2 flex-1 py-3 px-6 bg-indigo-100 rounded-lg text-indigo-700 font-medium hover:bg-indigo-200 transition duration-200"
+                >
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M7 4a3 3 0 016 0v4a3 3 0 11-6 0V4zm4 10.93A7.001 7.001 0 0017 8a1 1 0 10-2 0A5 5 0 015 8a1 1 0 00-2 0 7.001 7.001 0 006 6.93V17H6a1 1 0 100 2h8a1 1 0 100-2h-3v-2.07z" clip-rule="evenodd" />
+                    </svg>
+                    Speak
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        // Speech-to-text
+        const micButton = document.getElementById('mic-button');
+        const textarea = document.getElementById('tweet');
+
+        micButton.addEventListener('click', () => {
+            if ('webkitSpeechRecognition' in window) {
+                const recognition = new webkitSpeechRecognition();
+                recognition.lang = 'en-US';
+                recognition.interimResults = false;
+                recognition.maxAlternatives = 1;
+
+                micButton.innerHTML = `
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 animate-pulse" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M7 4a3 3 0 016 0v4a3 3 0 11-6 0V4zm4 10.93..." clip-rule="evenodd" />
+                    </svg>
+                    Listening...
+                `;
+                micButton.classList.replace('bg-indigo-100', 'bg-indigo-600');
+                micButton.classList.replace('text-indigo-700', 'text-white');
+
+                recognition.start();
+
+                recognition.onresult = function(event) {
+                    const speechResult = event.results[0][0].transcript;
+                    textarea.value = speechResult;
+
+                    micButton.innerHTML = `
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M7 4a3 3 0 016 0v4a3 3 0..." clip-rule="evenodd" />
+                        </svg>
+                        Speak
+                    `;
+                    micButton.classList.replace('bg-indigo-600', 'bg-indigo-100');
+                    micButton.classList.replace('text-white', 'text-indigo-700');
+                };
+
+                recognition.onerror = function(event) {
+                    alert('Speech recognition error: ' + event.error);
+                    micButton.innerHTML = `
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M7 4a3 3 0..." clip-rule="evenodd" />
+                        </svg>
+                        Speak
+                    `;
+                    micButton.classList.replace('bg-indigo-600', 'bg-indigo-100');
+                    micButton.classList.replace('text-white', 'text-indigo-700');
+                };
+            } else {
+                alert('Your browser does not support speech recognition. Please use Google Chrome.');
+            }
+        });
+    </script>
+</body>
+</html>
