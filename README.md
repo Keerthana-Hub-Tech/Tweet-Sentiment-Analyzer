@@ -8,7 +8,7 @@ Built with **Flask**, styled using **HTML/CSS**, and visualized using **Chart.js
 ## 🧠 Features
 
 - 🧪 **Sentiment Analysis** using VADER 
-- 🎤 Input tweets via a web form
+- 🎤 Input tweets via a text book oryour voice !
 - 📊 Sentiment score visualization with Chart.js (Bar Chart)
 - 🧱 Built with Flask (Backend) and HTML/CSS (Frontend)
 
