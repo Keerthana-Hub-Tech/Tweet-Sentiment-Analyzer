@@ -25,9 +25,10 @@ Built with **Flask**, styled using **HTML/CSS**, and visualized using **Chart.js
 
 ---
 
-## 📷 Screenshots (Optional)
+## 📷 Screenshots
 
 ![image](https://github.com/user-attachments/assets/431445ae-7ff1-44dd-ab96-36ecf463cbb1)
+![image](https://github.com/user-attachments/assets/fbb468ee-6563-4642-9c4e-d81b430f517a)
 
 
 
