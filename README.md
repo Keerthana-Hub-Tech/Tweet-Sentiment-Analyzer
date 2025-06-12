@@ -27,6 +27,7 @@ Built with **Flask**, styled using **HTML/CSS**, and visualized using **Chart.js
 
 ## 📷 Screenshots (Optional)
 
-> _Add screenshots of your UI or chart here when available_
+![image](https://github.com/user-attachments/assets/431445ae-7ff1-44dd-ab96-36ecf463cbb1)
+
 
 
