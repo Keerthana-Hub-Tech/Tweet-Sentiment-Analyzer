@@ -1,14 +1,14 @@
 # 🎙️ Tweet Sentiment Analyzer
 
 An interactive web application that analyzes the sentiment of user-input tweets using the pre-trained **VADER (Valence Aware Dictionary for Sentiment Reasoning)** model.  
-Built with **Flask**, styled using **HTML/CSS**, and visualized using **Chart.js**, this project also supports emoji-based feedback for an engaging experience.
+Built with **Flask**, styled using **HTML/CSS**, and visualized using **Chart.js**, this project also supports voice recognition user input for an engaging experience.
 
 ---
 
 ## 🧠 Features
 
 - 🧪 **Sentiment Analysis** using VADER 
-- 🎤 Input tweets via a text book oryour voice !
+- 🎤 Input tweets via a text book or your voice !
 - 📊 Sentiment score visualization with Chart.js (Bar Chart)
 - 🧱 Built with Flask (Backend) and HTML/CSS (Frontend)
 
